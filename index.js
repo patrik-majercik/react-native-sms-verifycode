@@ -247,6 +247,7 @@ class VerifyCode extends Component {
     const {
       autoFocus,
       verifyCodeLength,
+      onSubmitEditing,
 
       containerStyle,
       containerPaddingVertical,
@@ -315,6 +316,7 @@ class VerifyCode extends Component {
             this.TextInputFocused = false;
             this.setState({ focused: false });
           }}
+          onSubmitEditing={onSubmitEditing}
           onFocus={() => { this.TextInputFocused = true; }}
           autoFocus={autoFocus}
           maxLength={verifyCodeLength}
@@ -409,6 +411,7 @@ VerifyCode.defaultProps = {
   autoFocus: Constants.autoFocus,
   verifyCodeLength: Constants.verifyCodeLength,
   initialCodes: [],
+  onSubmitEditing:null,
 
   containerStyle: null,
   containerPaddingVertical: null,
