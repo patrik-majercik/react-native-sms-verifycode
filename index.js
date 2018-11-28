@@ -102,9 +102,9 @@ class VerifyCode extends Component {
       codeArray = text.split('');
       // add
       if (codeLength > this.curCodeLength) {
-        if (isNaN(codeArray[codeLength - 1]) || codeArray[codeLength - 1] === ' ') {
+        if (codeArray[codeLength - 1] === ' ') {
           // console.log('1 codeArray:', codeArray);
-          codeArray = codeArray.filter(code => !isNaN(code) && code !== ' ');
+          codeArray = codeArray.filter(code => code !== ' ');
           // console.log('2 codeArray:', codeArray)
           const reducer = (accumulator, currentValue) => `${accumulator}${currentValue}`;
           const codeText = codeArray.length > 0 ? codeArray.reduce(reducer) : '';
@@ -247,7 +247,7 @@ class VerifyCode extends Component {
     const {
       autoFocus,
       verifyCodeLength,
-      onSubmitEditing,
+      inputProps,
 
       containerStyle,
       containerPaddingVertical,
@@ -303,9 +303,9 @@ class VerifyCode extends Component {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={1}
-//         onPressIn={() => {
-//           if (!this.keyboardShow) { this.blur(); }
-//         }}
+        //         onPressIn={() => {
+        //           if (!this.keyboardShow) { this.blur(); }
+        //         }}
         onPressOut={() => this.focus()}
       >
         <TextInput
@@ -316,7 +316,6 @@ class VerifyCode extends Component {
             this.TextInputFocused = false;
             this.setState({ focused: false });
           }}
-          onSubmitEditing={onSubmitEditing}
           onFocus={() => { this.TextInputFocused = true; }}
           autoFocus={autoFocus}
           maxLength={verifyCodeLength}
@@ -328,6 +327,7 @@ class VerifyCode extends Component {
             this.onChangeText(text);
             // onInputCompleted(text)
           }}
+          {...inputProps}
         />
         <CodeView
           focused={focused}
@@ -371,6 +371,7 @@ VerifyCode.propTypes = {
     PropTypes.number,
     PropTypes.string,
   ])),
+  inputProps: PropTypes.object,
 
   containerStyle: PropTypes.oneOfType([PropTypes.object]),
   containerPaddingVertical: PropTypes.number,
@@ -411,7 +412,7 @@ VerifyCode.defaultProps = {
   autoFocus: Constants.autoFocus,
   verifyCodeLength: Constants.verifyCodeLength,
   initialCodes: [],
-  onSubmitEditing:null,
+  inputProps: {},
 
   containerStyle: null,
   containerPaddingVertical: null,
