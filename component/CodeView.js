@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   defaultCodeViewStyle: {
-    borderWidth: Constants.codeViewBorderWidth,
-    borderColor: Colors.codeViewBorderColor,
+    borderBottomWidth: Constants.codeViewBorderWidth,
+    borderBottomColor: Colors.codeViewBorderColor,
     borderRadius: Constants.codeViewBorderRadius,
     alignItems: 'center',
     justifyContent: 'center',
@@ -109,10 +109,10 @@ const CodeView = (props) => {
           const viewWidth = codeViewWidth ? { width: codeViewWidth } : {};
           const viewHight = codeViewHeight ? { height: codeViewHeight } : { height: codeViewWidth };
           const viewBackgroundColor = codeViewBackgroundColor ? { backgroundColor: codeViewBackgroundColor } : {};
-          const viewBorderWidth = codeViewBorderWidth ? { borderWidth: codeViewBorderWidth } : {};
+          const viewBorderWidth = codeViewBorderWidth ? { borderBottomWidth: codeViewBorderWidth } : {};
           const viewBorderRadius = codeViewBorderRadius ? { borderRadius: codeViewBorderRadius } : {};
-          const viewBorderColor = codeViewBorderColor ? { borderColor: codeViewBorderColor } : {};
-          const focusedViewBorderColor = focusedCodeViewBorderColor ? { borderColor: focusedCodeViewBorderColor } : {};
+          const viewBorderColor = codeViewBorderColor ? { borderBottomColor: codeViewBorderColor } : {};
+          const focusedViewBorderColor = focusedCodeViewBorderColor ? { borderBottomColor: focusedCodeViewBorderColor } : {};
           const vbColor = (foucsedIndex === index && focused) ? focusedViewBorderColor : viewBorderColor;
 
           // code style
