@@ -1,4 +1,4 @@
-/*
+﻿/*
 * @Author: shixiaoquan
 * @Date:   2018-03-20 17:48:11
 * @Last Modified by:   edmond
@@ -53,10 +53,6 @@ class VerifyCode extends Component {
   }
 
   componentDidMount() {
-    this.keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      this.keyboardDidShow.bind(this),
-    );
     this.keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       this.keyboardDidHide.bind(this),
@@ -65,7 +61,6 @@ class VerifyCode extends Component {
   }
 
   componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
     AppState.removeEventListener('change', this.onAppStateChange);
   }
@@ -173,19 +168,9 @@ class VerifyCode extends Component {
     return coverBGColorList;
   }
 
-  keyboardDidShow() {
-    this.keyboardShow = true;
-    if (this.TextInputFocused) {
-      this.setState({ focused: true });
-    }
-    // this.setState({ focused: true });
-    // this.focused = false;
-  }
-
   keyboardDidHide() {
-    // this.TextInputFocused = false;
-    this.keyboardShow = false;
     if (this.state.focused) {
+      this.textInput.blur();
       this.setState({ focused: false });
     }
   }
@@ -199,12 +184,6 @@ class VerifyCode extends Component {
       codeArray,
       coverBGColorList: this.getCoverBGColorList(codeArray, verifyCodeLength),
     });
-  }
-
-  blur = () => {
-    this.textInput.focus();
-    this.textInput.blur();
-    this.setState({ focused: false });
   }
 
   focus = () => {
@@ -312,11 +291,6 @@ class VerifyCode extends Component {
           ref={this.bindRef}
           underlineColorAndroid="transparent"
           caretHidden
-          onBlur={() => {
-            this.TextInputFocused = false;
-            this.setState({ focused: false });
-          }}
-          onFocus={() => { this.TextInputFocused = true; }}
           autoFocus={autoFocus}
           maxLength={verifyCodeLength}
           keyboardType="numeric"
